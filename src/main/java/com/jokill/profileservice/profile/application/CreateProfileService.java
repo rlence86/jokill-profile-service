@@ -1,7 +1,7 @@
-package com.jokill.profile.application;
+package com.jokill.profileservice.profile.application;
 
-import com.jokill.profile.adapter.out.ProfileRepository;
-import com.jokill.profile.domain.Profile;
+import com.jokill.profileservice.profile.adapter.out.ProfileRepository;
+import com.jokill.profileservice.profile.domain.Profile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,10 @@ public class CreateProfileService {
 
     private Profile mapCreateProfileDTOtoProfile(CreateProfileDTO profileData) {
         return Profile.builder()
+                .profileId(UUID.randomUUID())
                 .firstName(profileData.getFirstName())
                 .lastName(profileData.getLastName())
-                .dateOfBirth(profileData.getDateOfBirth())
+                .email(profileData.getEmail())
                 .build();
     }
 }

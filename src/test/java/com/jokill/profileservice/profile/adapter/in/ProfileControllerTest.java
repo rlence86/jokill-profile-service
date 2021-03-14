@@ -1,7 +1,7 @@
-package com.jokill.profile.adapter.in;
+package com.jokill.profileservice.profile.adapter.in;
 
-import com.jokill.profile.application.CreateProfileDTO;
-import com.jokill.profile.application.CreateProfileService;
+import com.jokill.profileservice.profile.application.CreateProfileDTO;
+import com.jokill.profileservice.profile.application.CreateProfileService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

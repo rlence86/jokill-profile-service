@@ -1,7 +1,7 @@
-package com.jokill.profile.application;
+package com.jokill.profileservice.profile.application;
 
-import com.jokill.profile.adapter.out.ProfileRepository;
-import com.jokill.profile.domain.Profile;
+import com.jokill.profileservice.profile.adapter.out.ProfileRepository;
+import com.jokill.profileservice.profile.domain.Profile;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -47,7 +47,7 @@ class CreateProfileServiceTest {
         return Profile.builder()
                 .firstName("TestName")
                 .lastName("TestLastname")
-                .dateOfBirth(LocalDate.of(2021, 3, 1))
+                .email("TestEmail")
                 .build();
     }
 
@@ -55,7 +55,7 @@ class CreateProfileServiceTest {
         return CreateProfileDTO.builder()
                 .firstName("TestName")
                 .lastName("TestLastname")
-                .dateOfBirth(LocalDate.of(2021, 3, 1))
+                .email("TestEmail")
                 .build();
     }
 
