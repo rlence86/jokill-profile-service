@@ -15,6 +15,8 @@ public class CreateProfileService {
 
     private final ProfileRepository repository;
 
+    private final IdentifierGeneratorService identifierGeneratorService;
+
     public UUID createProfileAndReturnId(CreateProfileDTO profileData) {
         Profile persistedProfile = repository.save(mapCreateProfileDTOtoProfile(profileData));
         return persistedProfile.getProfileId();
@@ -22,7 +24,8 @@ public class CreateProfileService {
 
     private Profile mapCreateProfileDTOtoProfile(CreateProfileDTO profileData) {
         return Profile.builder()
-                .profileId(UUID.randomUUID())
+                .profileId(identifierGeneratorService.getNewIdentifier())
+                .userName(profileData.getUserName())
                 .firstName(profileData.getFirstName())
                 .lastName(profileData.getLastName())
                 .email(profileData.getEmail())

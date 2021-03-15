@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Instant;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -21,11 +20,16 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CreateProfileServiceTest {
 
+    private final UUID PROFILE_ID = UUID.fromString("25772d01-a4b9-4568-9c10-e5f0bc9dab93");
+
     @InjectMocks
     private CreateProfileService service;
 
     @Mock
     private ProfileRepository repository;
+
+    @Mock
+    private IdentifierGeneratorService identifierGeneratorService;
 
     @Test
     void testCreateProfile() {
@@ -41,10 +45,13 @@ class CreateProfileServiceTest {
 
     private void givenDependenciesAreMocked(Profile profileToSave, UUID expectedUUID) {
         when(repository.save(profileToSave)).thenReturn(profileToSave.withProfileId(expectedUUID));
+        when(identifierGeneratorService.getNewIdentifier()).thenReturn(PROFILE_ID);
     }
 
     private Profile givenProfileToSave() {
         return Profile.builder()
+                .profileId(PROFILE_ID)
+                .userName("userName")
                 .firstName("TestName")
                 .lastName("TestLastname")
                 .email("TestEmail")
@@ -53,6 +60,7 @@ class CreateProfileServiceTest {
 
     private CreateProfileDTO givenCreateProfileDTO() {
         return CreateProfileDTO.builder()
+                .userName("userName")
                 .firstName("TestName")
                 .lastName("TestLastname")
                 .email("TestEmail")
