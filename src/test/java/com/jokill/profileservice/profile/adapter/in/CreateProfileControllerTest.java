@@ -13,15 +13,14 @@ import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@DisplayName("ProfileController unit tests")
+@DisplayName("Create profile controller unit tests")
 @ExtendWith(MockitoExtension.class)
-class ProfileControllerTest {
+class CreateProfileControllerTest {
 
     @InjectMocks
-    private ProfileController profileController;
+    private CreateProfileController controller;
 
     @Mock
     private CreateProfileService createProfileService;
@@ -30,24 +29,23 @@ class ProfileControllerTest {
     void testCreateProfile() {
         CreateProfileDTO createProfileDTO = CreateProfileDTO.builder().build();
         UUID expectedUUID = UUID.randomUUID();
-        givenAllDependenciesAreMocked(createProfileDTO, expectedUUID);
+        givenCreateProfileDependenciesAreMocked(createProfileDTO, expectedUUID);
 
         UUID result = whenCreateProfileIsCalled(createProfileDTO);
 
-        thenServiceIsCalledAndResultIsExpected(createProfileDTO, expectedUUID, result);
+        thenCreateProfileResultIsExpected(result, expectedUUID);
     }
 
-    private void givenAllDependenciesAreMocked(CreateProfileDTO createProfileDTO, UUID expectedUUID) {
+    private void givenCreateProfileDependenciesAreMocked(CreateProfileDTO createProfileDTO, UUID expectedUUID) {
         when(createProfileService.createProfileAndReturnId(createProfileDTO)).thenReturn(expectedUUID);
     }
 
     private UUID whenCreateProfileIsCalled(CreateProfileDTO createProfileDTO) {
-        return profileController.createProfile(createProfileDTO);
+        return controller.createProfile(createProfileDTO);
     }
 
-    private void thenServiceIsCalledAndResultIsExpected(CreateProfileDTO createProfileDTO, UUID expectedUUID, UUID result) {
-        assertThat(result, is(expectedUUID));
-        verify(createProfileService).createProfileAndReturnId(createProfileDTO);
+    private void thenCreateProfileResultIsExpected(UUID result, UUID expected) {
+        assertThat(result, is(expected));
     }
 
 }

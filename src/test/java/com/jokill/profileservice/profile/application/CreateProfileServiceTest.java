@@ -13,7 +13,6 @@ import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @DisplayName("CreateProfileService unit tests")
@@ -73,6 +72,5 @@ class CreateProfileServiceTest {
 
     private void thenRepositorySaveIsCalledAndResultIsExpected(Profile profileToSave, UUID expectedUUID, UUID createdUserId) {
         assertThat(createdUserId, is(expectedUUID));
-        verify(repository).save(profileToSave);
     }
 }

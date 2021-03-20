@@ -1,6 +1,10 @@
 package com.jokill.profileservice.profile.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.With;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
