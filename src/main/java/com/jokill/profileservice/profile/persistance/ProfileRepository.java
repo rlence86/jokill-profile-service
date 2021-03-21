@@ -1,4 +1,4 @@
-package com.jokill.profileservice.profile.adapter.out;
+package com.jokill.profileservice.profile.persistance;
 
 import com.jokill.profileservice.profile.domain.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;

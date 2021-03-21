@@ -1,4 +1,4 @@
-package com.jokill.profileservice.profile.adapter.in;
+package com.jokill.profileservice.profile.controllers;
 
 import com.jokill.profileservice.profile.application.GetProfileService;
 import com.jokill.profileservice.profile.application.ProfileDTO;

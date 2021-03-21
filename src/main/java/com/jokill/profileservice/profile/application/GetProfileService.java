@@ -1,6 +1,6 @@
 package com.jokill.profileservice.profile.application;
 
-import com.jokill.profileservice.profile.adapter.out.ProfileRepository;
+import com.jokill.profileservice.profile.persistance.ProfileRepository;
 import com.jokill.profileservice.profile.domain.Profile;
 import com.jokill.profileservice.profile.utils.ProfileEntityMapper;
 import javassist.NotFoundException;

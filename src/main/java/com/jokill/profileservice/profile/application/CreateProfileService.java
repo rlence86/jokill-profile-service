@@ -1,6 +1,6 @@
 package com.jokill.profileservice.profile.application;
 
-import com.jokill.profileservice.profile.adapter.out.ProfileRepository;
+import com.jokill.profileservice.profile.persistance.ProfileRepository;
 import com.jokill.profileservice.profile.domain.Profile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
