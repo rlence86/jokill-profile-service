@@ -7,8 +7,10 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +24,10 @@ public class GetProfileService {
         Optional<Profile> foundProfile = profileRepository.findById(profileId);
         return foundProfile.map(profileEntityMapper::toProfileDTO)
                 .orElseThrow(() -> new NotFoundException("Profile not found"));
+    }
+
+    public List<ProfileDTO> getAllProfiles() {
+        List<Profile> foundProfiles = profileRepository.findAll();
+        return foundProfiles.stream().map(profileEntityMapper::toProfileDTO).collect(Collectors.toList());
     }
 }

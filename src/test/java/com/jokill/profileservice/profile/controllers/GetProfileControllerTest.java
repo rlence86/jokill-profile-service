@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -36,16 +37,30 @@ class GetProfileControllerTest {
         thenGetProfileResultIsExpected(result, givenProfileDTOWithUUID(profileId));
     }
 
-    private void thenGetProfileResultIsExpected(ProfileDTO result, ProfileDTO expected) {
-        assertThat(result, is(expected));
+    @Test
+    void testGetAllProfiles() {
+        List<ProfileDTO> expectedResult = givenProfileDTOList();
+        givenGetAllProfilesDependenciesAreMocked(expectedResult);
+
+        List<ProfileDTO> result = whenGetAllProfilesIsCalled();
+
+        thenGetAllProfilesResultIsExpected(result, expectedResult);
     }
 
     private ProfileDTO whenGetProfileIsCalled(String profileId) throws NotFoundException {
         return controller.getProfile(profileId);
     }
 
+    private List<ProfileDTO> whenGetAllProfilesIsCalled() {
+        return controller.getAllProfiles();
+    }
+
     private void givenGetProfileDependenciesAreMocked(UUID profileId) throws NotFoundException {
         when(getProfileService.getProfileById(profileId)).thenReturn(givenProfileDTOWithUUID(profileId));
+    }
+
+    private void givenGetAllProfilesDependenciesAreMocked(List<ProfileDTO> profileDTOS) {
+        when(getProfileService.getAllProfiles()).thenReturn(profileDTOS);
     }
 
     private ProfileDTO givenProfileDTOWithUUID(UUID profileId) {
@@ -56,6 +71,21 @@ class GetProfileControllerTest {
                 .lastName("Player")
                 .email("myemail@test.com")
                 .build();
+    }
+
+    private List<ProfileDTO> givenProfileDTOList() {
+        return List.of(
+                givenProfileDTOWithUUID(UUID.randomUUID()),
+                givenProfileDTOWithUUID(UUID.randomUUID())
+        );
+    }
+
+    private void thenGetProfileResultIsExpected(ProfileDTO result, ProfileDTO expected) {
+        assertThat(result, is(expected));
+    }
+
+    private void thenGetAllProfilesResultIsExpected(List<ProfileDTO> result, List<ProfileDTO> expected) {
+        assertThat(result, is(expected));
     }
 
 }

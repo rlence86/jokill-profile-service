@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,5 +21,10 @@ public class GetProfileController {
     public ProfileDTO getProfile(@PathVariable String profileId) throws NotFoundException {
         UUID profileUuid = UUID.fromString(profileId);
         return getProfileService.getProfileById(profileUuid);
+    }
+
+    @GetMapping("/profile")
+    public List<ProfileDTO> getAllProfiles() {
+        return getProfileService.getAllProfiles();
     }
 }
