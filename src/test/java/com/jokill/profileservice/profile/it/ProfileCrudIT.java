@@ -52,11 +52,12 @@ public class ProfileCrudIT {
                 .email("testmail2@gmail.com")
                 .build();
 
-        ResponseEntity<Void> updatedResponse = testRestTemplate
-                .put("/profile/"+createdProfileId, updateProfileDTO);
+        testRestTemplate.put("/profile/"+createdProfileId, updateProfileDTO);
 
-        if (updatedResponse.getStatusCode() != HttpStatus.ACCEPTED) {
-            throw new RuntimeException("Error finding profile");
-        }
+        foundProfile = testRestTemplate.getForEntity("/profile/"+createdProfileId, ProfileDTO.class);
+        assertThat(foundProfile.getBody().getUserName(), is("userName2"));
+        assertThat(foundProfile.getBody().getFirstName(), is("TestName2"));
+        assertThat(foundProfile.getBody().getLastName(), is("TestLastName2"));
+        assertThat(foundProfile.getBody().getEmail(), is("testmail2@gmail.com"));
     }
 }
