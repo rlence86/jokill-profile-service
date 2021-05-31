@@ -59,5 +59,10 @@ public class ProfileCrudIT {
         assertThat(foundProfile.getBody().getFirstName(), is("TestName2"));
         assertThat(foundProfile.getBody().getLastName(), is("TestLastName2"));
         assertThat(foundProfile.getBody().getEmail(), is("testmail2@gmail.com"));
+
+        testRestTemplate.delete("/profile/"+createdProfileId);
+        ResponseEntity<String> responseEmpty = testRestTemplate.getForEntity("/profile/" + createdProfileId, String.class);
+        assertThat(responseEmpty.getStatusCode(), is(HttpStatus.NOT_FOUND));
+
     }
 }
